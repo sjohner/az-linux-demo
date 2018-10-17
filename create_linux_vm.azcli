@@ -1,0 +1,52 @@
+# global variables
+rgname=linuxdemo-prod-rg-$RANDOM
+vmname=azl$RANDOM
+
+# create resource group
+rg=$(az group create \
+  --name $rgname \
+  --location westeurope)
+
+# create storage account (e.g. for boot diagnostics)
+storageacct=demodata$RANDOM
+
+storage=$(az storage account create \
+  --resource-group $rgname \
+  --name $storageacct \
+  --sku Standard_LRS \
+  --location westeurope)
+
+# create vm
+vm=$(az vm create --resource-group $rgname \
+    --name $vmname \
+    --image UbuntuLTS \
+    --size Standard_DS4_v2 \
+    --data-disk-sizes-gb 100 200 \
+    --custom-data cloud_init.yml \
+    --storage-sku Premium_LRS \
+    --public-ip-address-dns-name $vmname \
+    --ssh-key-value ~/.ssh/id_rsa.pub)
+
+# enable boot diagnostics
+bloburi=$(az storage account show \
+  --resource-group $rgname \
+  --name $storageacct \
+  --query 'primaryEndpoints.blob' \
+  --output tsv)
+
+bootdiag=$(az vm boot-diagnostics enable \
+  --resource-group $rgname \
+  --name $vmname \
+  --storage $bloburi)
+
+# open ports (port 22 enabled by default)
+ports=$(az vm open-port \
+  --name custom-allow-web \
+  --port 80 \
+  --resource-group $rgname \
+  --name $vmname)
+
+echo $rg | jq '.name'
+echo $vm | jq '.powerState'
+echo $vm | jq '.publicIpAddress'
+echo $vm | jq '.fqdns'
