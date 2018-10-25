@@ -59,13 +59,13 @@ resource "azurerm_network_security_group" "networksecuritygroup" {
 }
 
 resource "azurerm_network_interface" "nic" {
-    name                = "${azurerm_virtual_machine.virtualmachine.name}VMNic"
+    name                = "azl${random_id.randomId.hex}VMNic"
     location            = "westeurope"
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
     network_security_group_id = "${azurerm_network_security_group.networksecuritygroup.id}"
 
     ip_configuration {
-        name                          = "${azurerm_virtual_machine.virtualmachine.name}VMNicConfig"
+        name                          = "azl${random_id.randomId.hex}VMNicConfig"
         subnet_id                     = "${azurerm_subnet.subnet.id}"
         private_ip_address_allocation = "dynamic"
         public_ip_address_id          = "${azurerm_public_ip.publicip.id}"
@@ -77,10 +77,10 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "random_id" "randomId" {
-    keepers = {
-        # Generate a new ID only when a new resource group is defined
-        resource_group = "${azurerm_resource_group.resourcegroup.name}"
-    }
+#    keepers = {
+#        # Generate a new ID only when a new resource group is defined
+#        resource_group = "${azurerm_resource_group.resourcegroup.name}"
+#    }
 
     byte_length = 8
 }
@@ -105,7 +105,7 @@ resource "azurerm_virtual_machine" "virtualmachine" {
     vm_size               = "Standard_DS1_v2"
 
     storage_os_disk {
-        name              = "${azurerm_virtual_machine.virtualmachine.name}_OsDisk"
+        name              = "azl${random_id.randomId.hex}_OsDisk"
         caching           = "ReadWrite"
         create_option     = "FromImage"
         managed_disk_type = "Premium_LRS"
@@ -119,7 +119,7 @@ resource "azurerm_virtual_machine" "virtualmachine" {
     }
 
     os_profile {
-        computer_name  = "${azurerm_virtual_machine.virtualmachine.name}"
+        computer_name  = "azl${random_id.randomId.hex}"
         admin_username = "stefan"
     }
 
