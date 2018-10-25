@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "resourcegroup" {
-    name     = "myResourceGroup"
+    name     = "tfdemo-prod-rg-${random_id.randomId.hex}"
     location = "westeurope"
 
     tags {
