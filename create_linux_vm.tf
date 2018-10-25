@@ -77,10 +77,10 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "random_id" "randomId" {
-    keepers = {
+#    keepers = {
         # Generate a new ID only when a new resource group is defined
-        resource_group = "${azurerm_resource_group.resourcegroup.name}"
-    }
+#        resource_group = "${azurerm_resource_group.resourcegroup.name}"
+#    }
 
     byte_length = 8
 }
@@ -98,7 +98,7 @@ resource "azurerm_storage_account" "storageaccount" {
 }
 
 resource "azurerm_virtual_machine" "virtualmachine" {
-    name                  = "myVM"
+    name                  = "azl${random_id.randomId.hex}"
     location              = "westeurope"
     resource_group_name   = "${azurerm_resource_group.resourcegroup.name}"
     network_interface_ids = ["${azurerm_network_interface.nic.id}"]
@@ -119,7 +119,7 @@ resource "azurerm_virtual_machine" "virtualmachine" {
     }
 
     os_profile {
-        computer_name  = "myvm"
+        computer_name  = "azl${random_id.randomId.hex}"
         admin_username = "stefan"
     }
 

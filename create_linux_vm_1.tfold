@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "resourcegroup" {
 }
 
 resource "azurerm_virtual_network" "virtualnetwork" {
-    name                = "azl${random_id.randomId.hex}VNET"
+    name                = "${azurerm_virtual_machine.virtualmachine.name}VNET"
     address_space       = ["10.0.0.0/16"]
     location            = "westeurope"
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
@@ -19,14 +19,14 @@ resource "azurerm_virtual_network" "virtualnetwork" {
 }
 
 resource "azurerm_subnet" "subnet" {
-    name                 = "azl${random_id.randomId.hex}Subnet"
+    name                 = "${azurerm_virtual_machine.virtualmachine.name}Subnet"
     resource_group_name  = "${azurerm_resource_group.resourcegroup.name}"
     virtual_network_name = "${azurerm_virtual_network.virtualnetwork.name}"
     address_prefix       = "10.0.2.0/24"
 }
 
 resource "azurerm_public_ip" "publicip" {
-    name                         = "azl${random_id.randomId.hex}PublicIP"
+    name                         = "${azurerm_virtual_machine.virtualmachine.name}PublicIP"
     location                     = "westeurope"
     resource_group_name          = "${azurerm_resource_group.resourcegroup.name}"
     public_ip_address_allocation = "dynamic"
@@ -37,7 +37,7 @@ resource "azurerm_public_ip" "publicip" {
 }
 
 resource "azurerm_network_security_group" "networksecuritygroup" {
-    name                = "azl${random_id.randomId.hex}NSG"
+    name                = "${azurerm_virtual_machine.virtualmachine.name}NSG"
     location            = "westeurope"
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
 
@@ -59,13 +59,13 @@ resource "azurerm_network_security_group" "networksecuritygroup" {
 }
 
 resource "azurerm_network_interface" "nic" {
-    name                = "azl${random_id.randomId.hex}VMNic"
+    name                = "${azurerm_virtual_machine.virtualmachine.name}VMNic"
     location            = "westeurope"
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
     network_security_group_id = "${azurerm_network_security_group.networksecuritygroup.id}"
 
     ip_configuration {
-        name                          = "azl${random_id.randomId.hex}VMNicConfig"
+        name                          = "${azurerm_virtual_machine.virtualmachine.name}VMNicConfig"
         subnet_id                     = "${azurerm_subnet.subnet.id}"
         private_ip_address_allocation = "dynamic"
         public_ip_address_id          = "${azurerm_public_ip.publicip.id}"
@@ -78,7 +78,7 @@ resource "azurerm_network_interface" "nic" {
 
 resource "random_id" "randomId" {
 #    keepers = {
-#        # Generate a new ID only when a new resource group is defined
+        # Generate a new ID only when a new resource group is defined
 #        resource_group = "${azurerm_resource_group.resourcegroup.name}"
 #    }
 
@@ -105,7 +105,7 @@ resource "azurerm_virtual_machine" "virtualmachine" {
     vm_size               = "Standard_DS1_v2"
 
     storage_os_disk {
-        name              = "azl${random_id.randomId.hex}_OsDisk"
+        name              = "${azurerm_virtual_machine.virtualmachine.name}_OsDisk"
         caching           = "ReadWrite"
         create_option     = "FromImage"
         managed_disk_type = "Premium_LRS"
@@ -119,7 +119,7 @@ resource "azurerm_virtual_machine" "virtualmachine" {
     }
 
     os_profile {
-        computer_name  = "azl${random_id.randomId.hex}"
+        computer_name  = "${azurerm_virtual_machine.virtualmachine.name}"
         admin_username = "stefan"
     }
 
