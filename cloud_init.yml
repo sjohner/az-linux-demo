@@ -13,6 +13,3 @@ runcmd:
   - docker run --rm --name "hugo" -v $(pwd)/src:/src -v $(pwd)/output:/output -e HUGO_THEME="hyde" jojomi/hugo
   - mv $(pwd)/output/* /var/www/html/
   - service apache2 reload
-phone_home:
-  - url: "https://prod-24.westeurope.logic.azure.com:443/workflows/238891be5ae44e5882c5044ea454d604/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=EarY5TL7baEnUdhJw8MbXoqSZJdJ1R2sruSfp3FHbNk"
-  - post: [ pub_key_dsa, pub_key_rsa, pub_key_ecdsa, instance_id ]
