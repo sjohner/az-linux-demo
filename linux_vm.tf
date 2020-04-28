@@ -61,7 +61,6 @@ resource "azurerm_network_interface" "nic" {
     name = "azl${random_id.randomId.hex}VMNic"
     location = "${var.location}"
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
-    network_security_group_id = "${azurerm_network_security_group.networksecuritygroup.id}"
     tags = var.tags
     ip_configuration {
         name = "azl${random_id.randomId.hex}VMNicConfig"
@@ -69,6 +68,11 @@ resource "azurerm_network_interface" "nic" {
         private_ip_address_allocation = "dynamic"
         public_ip_address_id = "${azurerm_public_ip.publicip.id}"
     }
+}
+
+resource "azurerm_network_interface_security_group_association" "example" {
+  network_interface_id = azurerm_network_interface.nic.id
+  network_security_group_id = azurerm_network_security_group.networksecuritygroup.id
 }
 
 resource "azurerm_storage_account" "storageaccount" {
