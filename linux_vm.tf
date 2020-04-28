@@ -5,7 +5,7 @@ resource "random_id" "randomId" {
 resource "azurerm_resource_group" "resourcegroup" {
     name = "tfdemo-prod-rg-${random_id.randomId.hex}"
     location = "${var.location}"
-    tags = "${var.tags}"
+    tags = var.tags
 }
 
 resource "azurerm_virtual_network" "virtualnetwork" {
@@ -13,10 +13,7 @@ resource "azurerm_virtual_network" "virtualnetwork" {
     address_space = ["10.0.0.0/16"]
     location = "${var.location}"
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
-
-    tags {
-        environment = "Terraform Demo"
-    }
+    tags = var.tags
 }
 
 resource "azurerm_subnet" "subnet1" {
@@ -39,17 +36,14 @@ resource "azurerm_public_ip" "publicip" {
     location = "${var.location}"
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
     public_ip_address_allocation = "dynamic"
-
-    tags {
-        environment = "Terraform Demo"
-    }
+    tags = var.tags
 }
 
 resource "azurerm_network_security_group" "networksecuritygroup" {
     name = "azl${random_id.randomId.hex}NSG"
     location = "${var.location}"
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
-
+    tags = var.tags
     security_rule {
         name = "SSH"
         priority = 1001
@@ -61,10 +55,6 @@ resource "azurerm_network_security_group" "networksecuritygroup" {
         source_address_prefix = "*"
         destination_address_prefix = "*"
     }
-
-    tags {
-        environment = "Terraform Demo"
-    }
 }
 
 resource "azurerm_network_interface" "nic" {
@@ -72,16 +62,12 @@ resource "azurerm_network_interface" "nic" {
     location = "${var.location}"
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
     network_security_group_id = "${azurerm_network_security_group.networksecuritygroup.id}"
-
+    tags = var.tags
     ip_configuration {
         name = "azl${random_id.randomId.hex}VMNicConfig"
         subnet_id = "${azurerm_subnet.subnet1.id}"
         private_ip_address_allocation = "dynamic"
         public_ip_address_id = "${azurerm_public_ip.publicip.id}"
-    }
-
-    tags {
-        environment = "Terraform Demo"
     }
 }
 
@@ -91,10 +77,7 @@ resource "azurerm_storage_account" "storageaccount" {
     location = "${var.location}"
     account_replication_type = "LRS"
     account_tier = "Standard"
-
-    tags {
-        environment = "Terraform Demo"
-    }
+    tags = var.tags
 }
 
 resource "azurerm_linux_virtual_machine" "virtualmachine" {
@@ -105,6 +88,7 @@ resource "azurerm_linux_virtual_machine" "virtualmachine" {
     admin_username = "stefan"
     disable_password_authentication = true
     computer_name  = "azl${random_id.randomId.hex}"
+    tags = var.tags
     network_interface_ids = [
         "${azurerm_network_interface.nic.id}"
     ]
@@ -130,9 +114,5 @@ resource "azurerm_linux_virtual_machine" "virtualmachine" {
 
     boot_diagnostics {
         storage_account_uri = "${azurerm_storage_account.storageaccount.primary_blob_endpoint}"
-    }
-
-    tags {
-        environment = "Terraform Demo"
     }
 }
