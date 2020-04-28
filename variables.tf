@@ -1,8 +1,8 @@
 provider "azurerm" {
     version = "=2.7.0"
-    subscription_id = "${var.subscription_id}"
+    subscription_id = var.subscription_id
     features {}
- }
+}
 
 variable "subscription_id" {
     description = "Subscription ID for provisioning resources in Azure"
