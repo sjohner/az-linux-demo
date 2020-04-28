@@ -35,7 +35,7 @@ resource "azurerm_public_ip" "publicip" {
     name = "azl${random_id.randomId.hex}PublicIP"
     location = "${var.location}"
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
-    allocation_method = "dynamic"
+    allocation_method = "Dynamic"
     tags = var.tags
 }
 
