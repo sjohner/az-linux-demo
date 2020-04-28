@@ -9,3 +9,7 @@ variable "subscription_id" {
 variable "location" {
     description = "The default Azure region for the resource provisioning"
 }
+
+variable "tags" {
+    description = "The default tags applied to the resources"
+}
