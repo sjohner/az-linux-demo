@@ -105,8 +105,7 @@ resource "azurerm_linux_virtual_machine" "virtualmachine" {
     os_disk {
         name = "azl${random_id.randomId.hex}_OsDisk"
         caching = "ReadWrite"
-        create_option = "FromImage"
-        managed_disk_type = "Premium_LRS"
+        storage_account_type = "Premium_LRS"
     }
 
     source_image_reference {
