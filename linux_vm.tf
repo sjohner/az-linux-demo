@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "resourcegroup" {
     name     = "tfdemo-prod-rg-${random_id.randomId.hex}"
-    location = "westeurope"
+    location = var.location
 
     tags {
         environment = "Terraform Demo"
@@ -10,7 +10,7 @@ resource "azurerm_resource_group" "resourcegroup" {
 resource "azurerm_virtual_network" "virtualnetwork" {
     name                = "azl${random_id.randomId.hex}VNET"
     address_space       = ["10.0.0.0/16"]
-    location            = "westeurope"
+    location            = var.location
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
 
     tags {
@@ -35,7 +35,7 @@ resource "azurerm_subnet" "subnet2" {
 
 resource "azurerm_public_ip" "publicip" {
     name                         = "azl${random_id.randomId.hex}PublicIP"
-    location                     = "westeurope"
+    location                     = var.location
     resource_group_name          = "${azurerm_resource_group.resourcegroup.name}"
     public_ip_address_allocation = "dynamic"
 
@@ -46,7 +46,7 @@ resource "azurerm_public_ip" "publicip" {
 
 resource "azurerm_network_security_group" "networksecuritygroup" {
     name                = "azl${random_id.randomId.hex}NSG"
-    location            = "westeurope"
+    location            = var.location
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
 
     security_rule {
@@ -68,7 +68,7 @@ resource "azurerm_network_security_group" "networksecuritygroup" {
 
 resource "azurerm_network_interface" "nic" {
     name                = "azl${random_id.randomId.hex}VMNic"
-    location            = "westeurope"
+    location            = var.location
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
     network_security_group_id = "${azurerm_network_security_group.networksecuritygroup.id}"
 
@@ -91,7 +91,7 @@ resource "random_id" "randomId" {
 resource "azurerm_storage_account" "storageaccount" {
     name                = "diag${random_id.randomId.hex}"
     resource_group_name = "${azurerm_resource_group.resourcegroup.name}"
-    location            = "westeurope"
+    location            = var.location
     account_replication_type = "LRS"
     account_tier = "Standard"
 
@@ -102,7 +102,7 @@ resource "azurerm_storage_account" "storageaccount" {
 
 resource "azurerm_virtual_machine" "virtualmachine" {
     name                  = "azl${random_id.randomId.hex}"
-    location              = "westeurope"
+    location              = var.location
     resource_group_name   = "${azurerm_resource_group.resourcegroup.name}"
     network_interface_ids = ["${azurerm_network_interface.nic.id}"]
     vm_size               = "Standard_DS1_v2"
@@ -117,7 +117,7 @@ resource "azurerm_virtual_machine" "virtualmachine" {
     storage_image_reference {
         publisher = "Canonical"
         offer     = "UbuntuServer"
-        sku       = "16.04.0-LTS"
+        sku       = "18.04.0-LTS"
         version   = "latest"
     }
 
