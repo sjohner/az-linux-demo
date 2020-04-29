@@ -12,6 +12,14 @@ variable "location" {
     description = "The default Azure region for the resource provisioning"
 }
 
+variable "vm_size" {
+    description = "The default virtual machine SKU"
+}
+
+variable "admin_username" {
+    description = "The default admin username to connect to the new virtual machine"
+}
+
 variable "tags" {
     description = "The default tags applied to the resources"
 }

@@ -88,8 +88,8 @@ resource "azurerm_linux_virtual_machine" "virtualmachine" {
     name = "azl${random_id.randomId.hex}"
     resource_group_name = azurerm_resource_group.resourcegroup.name
     location = var.location
-    size = "Standard_DS1_v2"
-    admin_username = "stefan"
+    size = var.vm_size
+    admin_username = var.admin_username
     disable_password_authentication = true
     computer_name  = "azl${random_id.randomId.hex}"
     tags = var.tags
@@ -98,7 +98,7 @@ resource "azurerm_linux_virtual_machine" "virtualmachine" {
     ]
     
     admin_ssh_key {
-        username = "stefan"
+        username = var.admin_username
         public_key = file("~/.ssh/id_rsa.pub")
     }
 
