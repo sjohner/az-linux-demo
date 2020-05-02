@@ -43,7 +43,7 @@ resource "azurerm_public_ip" "publicip" {
     location = var.location
     resource_group_name = azurerm_resource_group.resourcegroup.name
     allocation_method = "Dynamic"
-    domain_name_label = random_id.randomId.hex
+    domain_name_label = var.domain_name_label
     tags = var.tags
 }
 
@@ -100,7 +100,7 @@ resource "azurerm_linux_virtual_machine" "virtualmachine" {
     admin_username = var.admin_username
     disable_password_authentication = true
     computer_name  = "azl${random_id.randomId.hex}"
-    # Not using source_image_id since getting error "Can not parse "source_image_id" as a resource id"
+    # Not using source_image_id since getting error "Can not parse "source_image_id" as a resource id". Opend issue #6745
     #source_image_id = data.azurerm_platform_image.ubuntu_server.id
     tags = var.tags
 

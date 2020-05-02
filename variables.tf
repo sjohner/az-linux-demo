@@ -41,6 +41,11 @@ variable "vm_image_sku" {
     description = "The virtual machine image SKU to be used"
 }
 
+variable "vm_domain_name_label" {
+    default = "jhnr-azdemo"
+    description = "Domain name label for FQDN in Microsoft Azure DNS system"
+}
+
 variable "admin_username" {
     description = "The default admin username to connect to the new virtual machine"
 }
