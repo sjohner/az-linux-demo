@@ -1,17 +1,17 @@
 provider "azurerm" {
-    # Whilst version is optional, it is strongly recommend using it to pin the version of the Provider being used
-    version = "=2.7.0"
+  # Whilst version is optional, it is strongly recommend using it to pin the version of the Provider being used
+  version = "=2.7.0"
 
-    subscription_id = var.subscription_id
-    #client_id       = var.client_id
-    #client_secret   = var.client_secret
-    #tenant_id       = var.tenant_id
-    
-    features {}
+  subscription_id = var.subscription_id
+  #client_id       = var.client_id
+  #client_secret   = var.client_secret
+  #tenant_id       = var.tenant_id
+
+  features {}
 }
 
 variable "subscription_id" {
-    description = "Id of the subscription in which resources are deployed"
+  description = "Id of the subscription in which resources are deployed"
 }
 
 /* variable "client_secret" {
@@ -27,39 +27,39 @@ variable "tenant_id" {
 } */
 
 variable "location" {
-    default = "switzerlandnorth"
-    description = "The Azure region where resources are deployed"
+  default     = "switzerlandnorth"
+  description = "The Azure region where resources are deployed"
 }
 
 variable "app_id" {
-    default = "blog"
-    description = "The name of the app"
+  default     = "blog"
+  description = "The name of the app"
 }
 
 variable "stage" {
-    default = "dev"
-    description = "The stage where the app is deployed"
+  default     = "dev"
+  description = "The stage where the app is deployed"
 }
 
 variable "vm_size" {
-    default = "Standard_D1_v2"
-    description = "The virtual machine size"
+  default     = "Standard_D1_v2"
+  description = "The virtual machine size"
 }
 
 variable "vm_image_sku" {
-    default = "18.04-LTS"
-    description = "The virtual machine image SKU to be used"
+  default     = "18.04-LTS"
+  description = "The virtual machine image SKU to be used"
 }
 
 variable "pip_domain_name_label" {
-    default = "jhnr-azdemo"
-    description = "Domain name label for FQDN in Microsoft Azure DNS system"
+  default     = "jhnr-azdemo"
+  description = "Domain name label for FQDN in Microsoft Azure DNS system"
 }
 
 variable "admin_username" {
-    description = "The default admin username to connect to the new virtual machine"
+  description = "The default admin username to connect to the new virtual machine"
 }
 
 variable "tags" {
-    description = "The default tags applied to the resources"
+  description = "The default tags applied to the resources"
 }
