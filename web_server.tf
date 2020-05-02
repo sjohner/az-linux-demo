@@ -20,7 +20,7 @@ data "http" "web-vm-cloud-init" {
 
 # Read bash cloud init file which we got from github
 data "template_file" "web-vm-cloud-init" {
-  template = data.http.example.body
+  template = data.http.web-vm-cloud-init.body
 }
 
 
