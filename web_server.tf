@@ -9,10 +9,21 @@ locals {
   sku       = "18.04-LTS"
 } */
 
-# Read bash cloud init file
-data "template_file" "web-vm-cloud-init" {
-  template = file("web_cloud_init.sh")
+# Get content of cloud init file for web server from github 
+data "http" "web-vm-cloud-init" {
+  url = "https://raw.githubusercontent.com/sjohner/az-linux-demo/master/web_cloud_init.sh"
+
+  request_headers = {
+    Accept = "text/*"
+  }
 }
+
+# Read bash cloud init file which we got from github
+data "template_file" "web-vm-cloud-init" {
+  template = data.http.example.body
+}
+
+
 
 resource "azurerm_storage_account" "diag-sa" {
   name                     = lower("${var.app_id}${var.stage}sa")

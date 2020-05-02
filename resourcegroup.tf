@@ -1,8 +1,8 @@
 locals {
   tags = {
     environment = var.stage
-    owner = "Stefan Johner"
-    app = var.app_id
+    owner       = "Stefan Johner"
+    app         = var.app_id
   }
 }
 
