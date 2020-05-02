@@ -31,6 +31,16 @@ variable "location" {
     description = "The Azure region where resources are deployed"
 }
 
+variable "app_id" {
+    default = "blog"
+    description = "The name of the app"
+}
+
+variable "stage" {
+    default = "dev"
+    description = "The stage where the app is deployed"
+}
+
 variable "vm_size" {
     default = "Standard_D1_v2"
     description = "The virtual machine size"
