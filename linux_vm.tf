@@ -43,7 +43,7 @@ resource "azurerm_public_ip" "publicip" {
     location = var.location
     resource_group_name = azurerm_resource_group.resourcegroup.name
     allocation_method = "Dynamic"
-    domain_name_label = var.domain_name_label
+    domain_name_label = var.pip_domain_name_label
     tags = var.tags
 }
 

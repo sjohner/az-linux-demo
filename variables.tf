@@ -41,7 +41,7 @@ variable "vm_image_sku" {
     description = "The virtual machine image SKU to be used"
 }
 
-variable "vm_domain_name_label" {
+variable "pip_domain_name_label" {
     default = "jhnr-azdemo"
     description = "Domain name label for FQDN in Microsoft Azure DNS system"
 }
