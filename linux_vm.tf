@@ -100,8 +100,16 @@ resource "azurerm_linux_virtual_machine" "virtualmachine" {
     admin_username = var.admin_username
     disable_password_authentication = true
     computer_name  = "azl${random_id.randomId.hex}"
-    source_image_id = data.azurerm_platform_image.ubuntu_server.id
+    # Not using source_image_id since getting error "Can not parse "source_image_id" as a resource id"
+    #source_image_id = data.azurerm_platform_image.ubuntu_server.id
     tags = var.tags
+
+    source_image_reference {
+        publisher = "Canonical"
+        offer     = "UbuntuServer"
+        sku       = "18.04-LTS"
+        version   = "latest"
+    }
 
     custom_data = base64encode(data.template_file.linux-vm-cloud-init.rendered)
 
