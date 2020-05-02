@@ -2,12 +2,12 @@ locals {
   web_vm_name = "${var.app_id}-${var.stage}-web-vm"
 }
 
-data "azurerm_platform_image" "ubuntu_server" {
+/* data "azurerm_platform_image" "ubuntu_server" {
   location  = var.location
   publisher = "Canonical"
   offer     = "UbuntuServer"
-  sku       = var.vm_image_sku
-}
+  sku       = "18.04-LTS"
+} */
 
 # Read bash cloud init file
 data "template_file" "web-vm-cloud-init" {
@@ -28,7 +28,7 @@ resource "azurerm_public_ip" "web-pip" {
   location            = var.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
   allocation_method   = "Dynamic"
-  domain_name_label   = "${var.pip_domain_name_label}-${var.stage}"
+  domain_name_label   = "jhnr-${var.app_id}-${var.stage}"
   tags                = var.tags
 }
 

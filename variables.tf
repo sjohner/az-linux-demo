@@ -46,24 +46,10 @@ variable "vm_size" {
   description = "The virtual machine size"
 }
 
-variable "vm_image_sku" {
-  default     = "18.04-LTS"
-  description = "The virtual machine image SKU to be used"
-}
-
-variable "pip_domain_name_label" {
-  default     = "jhnr"
-  description = "Domain name label for FQDN in Microsoft Azure DNS system"
-}
-
 variable "admin_username" {
   description = "The admin username to connect to the new virtual machine"
 }
 
 variable "admin_ssh_key" {
   description = "The ssh public key to connect to the new virtual machine"
-}
-
-variable "tags" {
-  description = "The default tags applied to the resources"
 }
