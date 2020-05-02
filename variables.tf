@@ -15,15 +15,15 @@ variable "subscription_id" {
 }
 
 variable "client_id" {
-    description = "Service Principal Id to authenticate to Azure"
+  description = "Service Principal Id to authenticate to Azure"
 }
 
 variable "client_secret" {
-    description = "Secret of the service principal used to authenticate to Azure"
+  description = "Secret of the service principal used to authenticate to Azure"
 }
 
 variable "tenant_id" {
-    description = "Id of the AAD tenant you are authenticating against"
+  description = "Id of the AAD tenant you are authenticating against"
 }
 
 variable "location" {
