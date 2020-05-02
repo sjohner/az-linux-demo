@@ -134,7 +134,7 @@ resource "azurerm_linux_virtual_machine" "virtualmachine" {
 }
 
 # Get public ip address from newly created virtual machine
-data "azurerm_public_ip" "example" {
+data "azurerm_public_ip" "publicip" {
     name = azurerm_public_ip.publicip.name
     resource_group_name = azurerm_linux_virtual_machine.virtualmachine.resource_group_name
 }
@@ -145,11 +145,11 @@ data "template_file" "linux-vm-cloud-init" {
 }
 
 output "public_ip_address" {
-  value = data.azurerm_public_ip.example.ip_address
+  value = data.azurerm_public_ip.publicip.ip_address
 }
 
 output "public_ip_fqdn" {
-  value = data.azurerm_public_ip.example.fqdn
+  value = data.azurerm_public_ip.publicip.fqdn
 }
 
 output "vm_image_version" {
