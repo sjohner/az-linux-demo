@@ -23,8 +23,6 @@ jobs:
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'init'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Terraform Validate'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -37,8 +35,7 @@ jobs:
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'plan'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          args: '-var="admin_ssh_key=${{ secrets.SSH_KEY }}"'
   preprod:
     name: 'Deploy to Pre-Production'
     runs-on: ubuntu-latest
