@@ -14,7 +14,7 @@ variable "subscription_id" {
     description = "Id of the subscription in which resources are deployed"
 }
 
-variable "client_secret" {
+/* variable "client_secret" {
     description = "Secret of the service principal used to authenticate to Azure"
 }
 
@@ -24,7 +24,7 @@ variable "client_id" {
 
 variable "tenant_id" {
     description = "Id of the AAD tenant you are authenticating against"
-}
+} */
 
 variable "location" {
     default = "switzerlandnorth"
