@@ -33,7 +33,7 @@ resource "azurerm_public_ip" "web-pip" {
 }
 
 resource "azurerm_network_interface" "web-vm-nic" {
-  name                = "${var.app_id}-${var.stage}-web-nic"
+  name                = "${var.app_id}-${var.stage}-web-vm-nic"
   location            = var.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
   tags                = var.tags
@@ -73,11 +73,11 @@ resource "azurerm_linux_virtual_machine" "web-vm" {
 
   admin_ssh_key {
     username   = var.admin_username
-    public_key = file("~/.ssh/id_rsa.pub")
+    public_key = var.admin_ssh_key
   }
 
   os_disk {
-    name                 = "${local.web_vm_name}-OsDisk"
+    name                 = "${local.web_vm_name}-osdisk"
     caching              = "ReadWrite"
     storage_account_type = "StandardSSD_LRS"
   }

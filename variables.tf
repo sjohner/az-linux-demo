@@ -3,9 +3,9 @@ provider "azurerm" {
   version = "=2.7.0"
 
   subscription_id = var.subscription_id
-  #client_id       = var.client_id
-  #client_secret   = var.client_secret
-  #tenant_id       = var.tenant_id
+  client_id       = var.client_id
+  client_secret   = var.client_secret
+  tenant_id       = var.tenant_id
 
   features {}
 }
@@ -14,17 +14,17 @@ variable "subscription_id" {
   description = "Id of the subscription in which resources are deployed"
 }
 
-/* variable "client_secret" {
-    description = "Secret of the service principal used to authenticate to Azure"
-}
-
 variable "client_id" {
     description = "Service Principal Id to authenticate to Azure"
 }
 
+variable "client_secret" {
+    description = "Secret of the service principal used to authenticate to Azure"
+}
+
 variable "tenant_id" {
     description = "Id of the AAD tenant you are authenticating against"
-} */
+}
 
 variable "location" {
   default     = "switzerlandnorth"
@@ -52,12 +52,16 @@ variable "vm_image_sku" {
 }
 
 variable "pip_domain_name_label" {
-  default     = "jhnr-azdemo"
+  default     = "jhnr"
   description = "Domain name label for FQDN in Microsoft Azure DNS system"
 }
 
 variable "admin_username" {
-  description = "The default admin username to connect to the new virtual machine"
+  description = "The admin username to connect to the new virtual machine"
+}
+
+variable "admin_ssh_key" {
+  description = "The ssh public key to connect to the new virtual machine"
 }
 
 variable "tags" {
