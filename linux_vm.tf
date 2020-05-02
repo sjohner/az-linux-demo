@@ -2,7 +2,7 @@ data "azurerm_platform_image" "ubuntu_server" {
   location  = var.location
   publisher = "Canonical"
   offer     = "UbuntuServer"
-  sku       = var.image_sku
+  sku       = var.vm_image_sku
 }
 
 resource "random_id" "randomId" {
