@@ -43,6 +43,7 @@ resource "azurerm_public_ip" "publicip" {
     location = var.location
     resource_group_name = azurerm_resource_group.resourcegroup.name
     allocation_method = "Dynamic"
+    domain_name_label = random_id.randomId.hex
     tags = var.tags
 }
 
@@ -137,6 +138,10 @@ data "template_file" "linux-vm-cloud-init" {
 
 output "public_ip_address" {
   value = data.azurerm_public_ip.example.ip_address
+}
+
+output "public_ip_fqdn" {
+  value = data.azurerm_public_ip.example.fqdn
 }
 
 output "vm_image_version" {
