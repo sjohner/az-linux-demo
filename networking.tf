@@ -3,7 +3,7 @@ resource "azurerm_virtual_network" "virtualnetwork" {
   address_space       = ["10.0.0.0/16"]
   location            = var.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
-  tags                = var.tags
+  tags                = local.tags
 }
 
 resource "azurerm_subnet" "web-subnet" {
@@ -25,7 +25,7 @@ resource "azurerm_network_security_group" "web-nsg" {
   name                = "${var.app_id}-${var.stage}-web-nsg"
   location            = var.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
-  tags                = var.tags
+  tags                = local.tags
 
   # Create allow SSH rule only in dev/test stages
   dynamic "security_rule" {

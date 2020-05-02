@@ -20,7 +20,7 @@ resource "azurerm_storage_account" "diag-sa" {
   location                 = var.location
   account_replication_type = "LRS"
   account_tier             = "Standard"
-  tags                     = var.tags
+  tags                     = local.tags
 }
 
 resource "azurerm_public_ip" "web-pip" {
@@ -29,14 +29,14 @@ resource "azurerm_public_ip" "web-pip" {
   resource_group_name = azurerm_resource_group.resourcegroup.name
   allocation_method   = "Dynamic"
   domain_name_label   = "jhnr-${var.app_id}-${var.stage}"
-  tags                = var.tags
+  tags                = local.tags
 }
 
 resource "azurerm_network_interface" "web-vm-nic" {
   name                = "${var.app_id}-${var.stage}-web-vm-nic"
   location            = var.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
-  tags                = var.tags
+  tags                = local.tags
   ip_configuration {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.web-subnet.id
@@ -55,7 +55,7 @@ resource "azurerm_linux_virtual_machine" "web-vm" {
   computer_name                   = local.web_vm_name
   # Not using source_image_id since getting error "Can not parse "source_image_id" as a resource id". Opend issue #6745
   #source_image_id = data.azurerm_platform_image.ubuntu_server.id
-  tags = var.tags
+  tags = local.tags
 
   source_image_reference {
     publisher = "Canonical"
@@ -100,8 +100,4 @@ output "public_ip_address" {
 
 output "public_ip_fqdn" {
   value = azurerm_public_ip.web-pip.fqdn
-}
-
-output "vm_image_version" {
-  value = data.azurerm_platform_image.ubuntu_server.version
 }
