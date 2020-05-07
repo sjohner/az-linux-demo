@@ -11,7 +11,7 @@ locals {
 
 # Get content of cloud init file for web server from github 
 data "http" "web-vm-cloud-init" {
-  url = "https://raw.githubusercontent.com/sjohner/az-linux-demo/master/web_cloud_init.sh"
+  url = "https://raw.githubusercontent.com/sjohner/az-linux-demo/master/terraform/web_cloud_init.sh"
 
   request_headers = {
     Accept = "text/*"
