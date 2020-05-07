@@ -1,0 +1,10 @@
+templateFile="azuredeploy.json"
+
+az group create \
+  --name arm-demo \
+  --location "West Europe"
+
+az deployment group create \
+  --name arm-demo-template \
+  --resource-group arm-demo \
+  --template-file $templateFile \
