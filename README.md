@@ -1,7 +1,7 @@
 # az-linux-demo
 Deploying to Azure with Terraform, Azure CLI and Azure Resource Manager
 
-![Terraform Workflow](https://github.com/sjohner/az-linux-demo/workflows/Deploy%20sample%20blog%20project%20to%20Azure/badge.svg)
+![Terraform Workflow](https://github.com/sjohner/az-linux-demo/workflows/Deploy%20Terraform%20sample%20to%20Azure/badge.svg)
 
 # Building the Github Actions workflow for Terraform
 Sample Github Actions workflow for Terraform deployments
