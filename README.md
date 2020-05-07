@@ -1,5 +1,5 @@
 # az-linux-demo
-Demo Scripts for creating Linux VMs on Azure
+Deploying to Azure with Terraform, Azure CLI and Azure Resource Manager
 
 ![Terraform Workflow](https://github.com/sjohner/az-linux-demo/workflows/Deploy%20sample%20blog%20project%20to%20Azure/badge.svg)
 
@@ -22,7 +22,7 @@ When deploying your Terraform config with Github Actions you will need the same 
 
 In Github, we can specify Secrets by going to Settings -> Secrets
 
-![Github Secrets](https://github.com/sjohner/az-linux-demo/images/github_secrets.png)
+![Github Secrets](https://github.com/sjohner/az-linux-demo/blob/master/images/github_secrets.png)
 
 You can afterwards use those secrets to set environment variables in your Github Actions workflows like this
 
@@ -42,7 +42,7 @@ Github Actions brings us a way to automate, customize, and execute our developme
 To continuously deploy code with GitHub Actions, you need to create a workflow. All workflows are defined in YAML.
 Creating a new workflow is easy. Make sure your Terraform code is stored in a Github repository and click on the _Actions_ button. Create your own YAML file by clicking the _Set up a workflow yourself_ button in the upper right corner of the screen.
 
-![Github Secrets](https://github.com/sjohner/az-linux-demo/images/create_workflow.png)
+![Github Secrets](https://github.com/sjohner/az-linux-demo/blob/master/images/create_workflow.png)
 
 An example workflow may look like this:
 ```
