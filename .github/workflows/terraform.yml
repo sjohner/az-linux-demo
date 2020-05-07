@@ -1,4 +1,4 @@
-name: Deploy sample blog project to Azure
+name: Deploy Terraform sample to Azure
 on:
   push:
     branches: [ master ]
