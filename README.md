@@ -70,6 +70,7 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
           ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          TF_VAR_stage: 'prod'
       - name: 'Terraform Plan'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -81,6 +82,7 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
           ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          TF_VAR_stage: 'prod'
           
 ````
 
@@ -99,6 +101,3 @@ The workflow contains a _build_ job has three steps:
 * Terraform Plan
 
 For the _init_ and _plan_ steps corresponding environment variables are defined which contain all necessary information to authenticate to Azure via a Service Principal
-
-Check out the full code sample here
-
