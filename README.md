@@ -35,7 +35,7 @@ ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 ```
 
 ## Store Terraform State in Azure
-Since having a local state doesn't work well in a team or collaborative environment, you want to make sure that you are storing your Terraform state in an Azure storage account. Check out [this tutorial](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage) for more information about storing your Terraform state file in Azure and [Terraform documentation](https://www.terraform.io/docs/backends/types/azurerm.html) for details about how to configure the azurerm backend 
+Since having a local state doesn't work well in a team or collaborative environment, you want to make sure that you are storing your Terraform state in an Azure storage account. Check out [this tutorial](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage) for more information about storing your Terraform state file in Azure and [Terraform documentation](https://www.terraform.io/docs/backends/types/azurerm.html) for details about how to configure the azurerm backend. 
 
 ## Create your workflow
 Github Actions brings us a way to automate, customize, and execute our development workflows right in the repository. More information about Github Actions can be found in the [Github documentation](https://help.github.com/en/actions)
