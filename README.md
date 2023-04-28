@@ -7,7 +7,7 @@ Deploying to Azure with Terraform, Azure CLI and Azure Resource Manager
 Sample Github Actions workflow for Terraform deployments
 
 ## Create Github secrets
-To deploy resources to your Azure subsription, you will need a Service Principal for authenticating to Azure. Check out [Terraform documentation](https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html) for more information on how to authenticate via a Service Principal with a client secret 
+To deploy resources to your Azure subsription, you will need a Service Principal for authenticating to Azure. Check out [Terraform documentation](https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html) for more information on how to authenticate via a Service Principal with a client secret. 
 
 Make sure you are able to deploy your Terraform configuration using the newly created Service Principal.
 
